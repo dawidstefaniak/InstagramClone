@@ -28,6 +28,7 @@ class MyApp extends StatelessWidget {
         primarySwatch: white,
       ),
       home: MyHomePage(title: 'Instagram'),
+      debugShowCheckedModeBanner: false,
     );
   }
 }
@@ -41,13 +42,28 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
-
   _getAppBar() {
     return AppBar(
-      title: Text(widget.title),
+      title: Image.asset("assets/icons/logo.png"),
       centerTitle: true,
-      leading: Icon(Icons.camera_alt),
-      actions: <Widget>[Icon(Icons.navigation)],
+      leading: Padding(
+        padding: const EdgeInsets.only(left: 16.0),
+        child: Image.asset(
+          "assets/icons/camera.png",
+          width: 20,
+          height: 20,
+        ),
+      ),
+      actions: <Widget>[
+        Padding(
+          padding: const EdgeInsets.only(right: 16.0),
+          child: Image.asset(
+            "assets/icons/arrow.png",
+            width: 25,
+            height: 25,
+          ),
+        )
+      ],
     );
   }
 
@@ -84,15 +100,18 @@ class _MyHomePageState extends State<MyHomePage> {
         Container(
           height: 90,
           child: ListView.builder(
-            scrollDirection: Axis.horizontal,
+              scrollDirection: Axis.horizontal,
               shrinkWrap: true,
               itemCount: 10,
               itemBuilder: (BuildContext context, int index) {
                 if (index == 0) return _getFirstStory();
-                if (index%2 == 1) return SizedBox(width: 12,);
-                else return _getStory();
-              }
-          ),
+                if (index % 2 == 1)
+                  return SizedBox(
+                    width: 12,
+                  );
+                else
+                  return _getStory();
+              }),
         ),
         _getPostColumn()
       ],
@@ -101,26 +120,29 @@ class _MyHomePageState extends State<MyHomePage> {
 
   _getFirstStory() {
     var firstStory = Column(children: <Widget>[
-      Container(
-        decoration: BoxDecoration(
-          shape: BoxShape.circle,
-          image: DecorationImage(
-            image: AssetImage("assets/images/profile1.jpg"),
+      Padding(
+        padding: const EdgeInsets.all(5.0),
+        child: Container(
+          decoration: BoxDecoration(
+            shape: BoxShape.circle,
+            image: DecorationImage(
+              image: AssetImage("assets/images/profile1.jpg"),
+            ),
           ),
-        ),
-        width: 60,
-        height: 60,
-        child: Align(
-          alignment: Alignment.bottomRight,
-          child: Container(
-            decoration: BoxDecoration(
-                shape: BoxShape.circle,
-                color: Colors.blue,
-                border: Border.all(width: 2, color: Colors.white)),
-            child: Icon(
-              Icons.add,
-              color: Colors.white,
-              size: 15,
+          width: 60,
+          height: 60,
+          child: Align(
+            alignment: Alignment.bottomRight,
+            child: Container(
+              decoration: BoxDecoration(
+                  shape: BoxShape.circle,
+                  color: Colors.blue,
+                  border: Border.all(width: 2, color: Colors.white)),
+              child: Icon(
+                Icons.add,
+                color: Colors.white,
+                size: 15,
+              ),
             ),
           ),
         ),
@@ -134,13 +156,28 @@ class _MyHomePageState extends State<MyHomePage> {
     var story = Column(children: <Widget>[
       Container(
         decoration: BoxDecoration(
-          shape: BoxShape.circle,
-          image: DecorationImage(
-            image: AssetImage("assets/images/profile1.jpg"),
+            shape: BoxShape.circle,
+            gradient: LinearGradient(colors: [Colors.red, Colors.yellow], tileMode: TileMode.clamp, begin: Alignment.topRight, end: Alignment(-0.5,1.5)), ),
+        child: Padding(
+          padding: const EdgeInsets.all(3),
+          child: Container(
+            decoration:
+                BoxDecoration(color: Colors.white, shape: BoxShape.circle),
+            child: Padding(
+              padding: const EdgeInsets.all(2.0),
+              child: Container(
+                decoration: BoxDecoration(
+                  shape: BoxShape.circle,
+                  image: DecorationImage(
+                    image: AssetImage("assets/images/profile1.jpg"),
+                  ),
+                ),
+                width: 60,
+                height: 60,
+              ),
+            ),
           ),
         ),
-        width: 60,
-        height: 60,
       ),
       Text("donnag144")
     ]);
@@ -189,6 +226,8 @@ class _MyHomePageState extends State<MyHomePage> {
         Padding(
           padding: const EdgeInsets.all(16.0),
           child: Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            crossAxisAlignment: CrossAxisAlignment.center,
             children: <Widget>[
               Icon(
                 Icons.favorite,
@@ -198,13 +237,16 @@ class _MyHomePageState extends State<MyHomePage> {
               SizedBox(
                 width: 15,
               ),
-              Icon(Icons.comment, size: 32),
+              Image.asset("assets/icons/comment.png", width: 30),
               SizedBox(
                 width: 15,
               ),
-              Icon(Icons.navigation),
+              Image.asset("assets/icons/arrow.png", width: 25),
               Spacer(),
-              Icon(Icons.save_alt)
+              Image.asset(
+                "assets/icons/bookmark.png",
+                width: 30,
+              ),
             ],
           ),
         ),
